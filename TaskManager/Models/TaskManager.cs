@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using TaskManagerAsp.Net.Models;
+using TaskManagerAsp.Net.Models.ValidationAttributes;
 
 namespace TaskManager.Models
 {
@@ -10,8 +12,10 @@ namespace TaskManager.Models
     {
         public int Id { get; set; }
         [Required]
+        [StartDateValidation]
         public DateTime StartTime { get; set; }
         [Required]
+        [EndDateValidation]
         public DateTime EndTime { get; set; }
         [Required]
         public bool Done { get; set; }
