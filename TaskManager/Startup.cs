@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
 using TaskManager.Models;
 using TaskManager.Services;
 
@@ -29,6 +30,11 @@ namespace TaskManager
             services.AddControllersWithViews();
             services.AddDbContextPool<TasksDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TaskDatabase")));
             services.AddScoped(typeof(IRepository<TasksManager>), typeof(TaskRepository));
+            services.AddRazorPages().AddMvcOptions(options =>
+                 {
+                     options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(_ => "Field can't be null.");
+                     options.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(_ => "Field Must Be A Number");
+                 });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

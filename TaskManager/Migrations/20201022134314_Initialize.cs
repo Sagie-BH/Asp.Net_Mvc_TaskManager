@@ -16,7 +16,7 @@ namespace TaskManager.Migrations
                     StartTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
                     Done = table.Column<bool>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
                     Priority = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

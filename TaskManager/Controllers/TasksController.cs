@@ -30,9 +30,16 @@ namespace TaskManagerAsp.Net.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool added = _taskRepositoryService.Create(task);
+                if(_taskRepositoryService.Create(task))
+                {
+                    return View("Index");
+                }
+                else
+                {
+                    return View("Index", task);
+                }
             }
-            return RedirectToAction("Index");
+            else return View("Index", task);
         }
         public ActionResult Delete(int id)
         {
@@ -44,8 +51,18 @@ namespace TaskManagerAsp.Net.Controllers
         }
         public ActionResult Update(TasksManager task)
         {
-            _taskRepositoryService.Update(task);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                if (_taskRepositoryService.Update(task))
+                {
+                    return View("Index");
+                }
+                else
+                {
+                    return View("Edit", task);
+                }
+            }
+            else return View("Edit", task);
         }
         public ActionResult Details(TasksManager task)
         {

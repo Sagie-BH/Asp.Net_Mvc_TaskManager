@@ -19,7 +19,7 @@ namespace TaskManager.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TaskManager.Models.TasksManager", b =>
+            modelBuilder.Entity("TaskManager.Models.TaskManager", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
