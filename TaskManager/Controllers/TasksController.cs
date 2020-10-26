@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Models;
 using TaskManager.Services;
@@ -11,10 +12,12 @@ namespace TaskManagerAsp.Net.Controllers
     public class TasksController : Controller
     {
         private readonly IRepository<TasksManager> _taskRepositoryService;
+        private readonly IMapper mapper;
 
-        public TasksController(IRepository<TasksManager> taskRepositoryService)
+        public TasksController(IRepository<TasksManager> taskRepositoryService, IMapper mapper)
         {
             this._taskRepositoryService = taskRepositoryService;
+            this.mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -39,7 +42,7 @@ namespace TaskManagerAsp.Net.Controllers
                     return View("Index", task);
                 }
             }
-            else return View("Index", task);
+            else return View("Index");
         }
         public ActionResult Delete(int id)
         {
@@ -49,6 +52,8 @@ namespace TaskManagerAsp.Net.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Update(TasksManager task)
         {
             if (ModelState.IsValid)
