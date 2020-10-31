@@ -12,12 +12,9 @@ namespace TaskManagerAsp.Net.Controllers
     public class TasksController : Controller
     {
         private readonly IRepository<TasksManager> _taskRepositoryService;
-        private readonly IMapper mapper;
-
-        public TasksController(IRepository<TasksManager> taskRepositoryService, IMapper mapper)
+        public TasksController(IRepository<TasksManager> taskRepositoryService)
         {
             this._taskRepositoryService = taskRepositoryService;
-            this.mapper = mapper;
         }
         public IActionResult Index()
         {

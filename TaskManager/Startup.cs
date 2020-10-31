@@ -29,14 +29,18 @@ namespace TaskManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
             services.AddDbContextPool<TasksDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TaskDatabase")));
+
             services.AddScoped(typeof(IRepository<TasksManager>), typeof(TaskRepository));
+
             services.AddRazorPages().AddMvcOptions(options =>
                  {
                      options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(_ => "Field can't be null.");
                      options.ModelBindingMessageProvider.SetValueMustBeANumberAccessor(_ => "Field Must Be A Number");
                  });
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

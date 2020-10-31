@@ -25,9 +25,7 @@ namespace TaskManagerAsp.Net.Controllers.Api
         }
         public ActionResult<IEnumerable<TaskViewModel>> GetAllTasks()
         {
-            var taskList = repository.GetAll();
-            mapper.Map<TaskViewModel>(taskList);
-            return Ok();
+            return Ok(mapper.Map<IEnumerable<TaskViewModel>>(repository.GetAll()));
         }
         [HttpGet("{id}")]
         public ActionResult<TaskViewModel> GetById(int id)
